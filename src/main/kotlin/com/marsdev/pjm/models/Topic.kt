@@ -23,7 +23,7 @@ class Topic : JsonModel {
     fun endDateProperty() = getProperty(Topic::endDate)
 
     override fun toString(): String {
-        return "Name: $topicName  Id: $topicId  Description: $description  Start: $startDate  End: $endDate"
+        return topicName
     }
 
     override fun updateModel(json: JsonObject) {
