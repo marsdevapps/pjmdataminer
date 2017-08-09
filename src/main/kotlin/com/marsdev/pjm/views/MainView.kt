@@ -5,6 +5,6 @@ import tornadofx.*
 class MainView : View("Main View") {
 
     override val root = borderpane {
-        center = label("Data Miner")
+        center(TopicView::class)
     }
 }
