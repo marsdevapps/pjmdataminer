@@ -6,5 +6,6 @@ class MainView : View("Main View") {
 
     override val root = borderpane {
         center(TopicView::class)
+        left(PnodeView::class)
     }
 }

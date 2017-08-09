@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.json.JsonObject
 
-class Topic() : JsonModel {
+class Topic : JsonModel {
 
     var topicId by property<Int>()
     fun topicIdProperty() = getProperty(Topic::topicId)

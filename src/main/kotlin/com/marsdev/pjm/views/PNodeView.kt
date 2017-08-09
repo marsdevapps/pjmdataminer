@@ -1,18 +1,19 @@
 package com.marsdev.pjm.views
 
 import com.marsdev.pjm.controllers.PJMDataMinerController
-import com.marsdev.pjm.models.Topic
+import com.marsdev.pjm.models.PNode
 import tornadofx.*
+import java.time.LocalDate
 
 
-class TopicView : View("Topics") {
+class PnodeView : View("Pnodes") {
     val controller: PJMDataMinerController by inject()
 
     override val root = borderpane {
 
         center = (
-                listview<Topic> {
-                    items = controller.getTopics().observable()
+                listview<PNode> {
+                    items = controller.getPnodes(LocalDate.of(2000, 10, 1), LocalDate.of(9999, 10, 1), true).observable()
                 }
                 )
     }
