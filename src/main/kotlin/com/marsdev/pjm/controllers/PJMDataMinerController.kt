@@ -2,7 +2,6 @@ package com.marsdev.pjm.controllers
 
 import com.marsdev.pjm.models.PNode
 import com.marsdev.pjm.models.Settings
-import com.marsdev.pjm.models.Topic
 import com.marsdev.pjm.views.ContentView
 import com.marsdev.pjm.views.PNodeView
 import com.marsdev.pjm.views.SettingsView
@@ -20,13 +19,11 @@ class PJMDataMinerController : Controller() {
     init {
         api.baseURI = "https://api.pjm.com/api/v1/"
         api.engine.requestInterceptor = { request ->
-            request.addHeader("Ocp-Apim-Subscription-Key", settings.apiKeyProperty().get())
+            request.addHeader("Ocp-Apim-Subscription-Key", settings.apiKey)
         }
 
         settings.apiKeyProperty().set(config.string("apikey"))
     }
-
-    fun getTopics(): MutableList<Topic> = api.get("topics").list().toModel<Topic>()
 
     fun getPnodes(rowCount: Int, startRow: Int): MutableList<PNode> {
         val params = mapOf("rowCount" to rowCount, "startRow" to startRow)
@@ -45,7 +42,7 @@ class PJMDataMinerController : Controller() {
 
     fun saveSettings() {
         with(config) {
-            set("apikey" to settings.apiKeyProperty().get())
+            set("apikey" to settings.apiKey)
             save()
         }
     }

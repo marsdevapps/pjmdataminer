@@ -8,6 +8,7 @@ class ContentView : View("Content") {
     override val root = stackpane {
         addClass(Styles.contentPane)
 
+        label("PJM Data Miner 2.0")
     }
 
     fun getContentPane(): StackPane {
