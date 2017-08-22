@@ -9,9 +9,9 @@ buildscript {
     ext.kotlin_version = '1.1.4'
 
     repositories {
+        jcenter()
         mavenLocal()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -25,8 +25,8 @@ targetCompatibility = 1.8
 
 
 repositories {
-    mavenLocal()
     jcenter()
+    mavenLocal()
     mavenCentral()
 }
 
@@ -45,6 +45,13 @@ dependencies {
     compile 'no.tornado:tornadofx:1.7.9'
 
     compile 'org.jsoup:jsoup:1.10.3'
+
+    compile 'no.tornado:tornadofx-controls:1.0.7-SNAPSHOT'
+    compile 'de.jensd:fontawesomefx-commons:8.15'
+    compile 'de.jensd:fontawesomefx-materialdesignfont:1.7.22-4'
+    compile 'de.jensd:fontawesomefx-materialicons:2.2.0-5'
+    compile 'de.jensd:fontawesomefx-controls:8.15'
+    compile 'de.jensd:fontawesomefx-fontawesome:4.7.0-5'
 }
 
 compileKotlin {
