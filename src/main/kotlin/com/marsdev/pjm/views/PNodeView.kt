@@ -3,7 +3,6 @@ package com.marsdev.pjm.views
 import com.marsdev.pjm.controllers.PJMDataMinerController
 import com.marsdev.pjm.models.PNode
 import tornadofx.*
-import java.time.LocalDate
 
 
 class PnodeView : View("Pnodes") {
@@ -13,7 +12,7 @@ class PnodeView : View("Pnodes") {
 
         center = (
                 listview<PNode> {
-                    items = controller.getPnodes(LocalDate.of(2000, 10, 1), LocalDate.of(9999, 10, 1), true).observable()
+                    items = controller.getPnodes(9999, 1).observable().sorted()
                 }
                 )
     }
