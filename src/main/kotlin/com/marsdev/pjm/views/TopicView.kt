@@ -12,7 +12,7 @@ class TopicView : View("Topics") {
 
         center = (
                 listview<Topic> {
-                    items = controller.getTopics().observable()
+                    //                    items = controller.getTopics().observable()
                 }
                 )
     }

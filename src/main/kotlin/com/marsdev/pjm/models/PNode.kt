@@ -34,20 +34,17 @@ class PNode : JsonModel, Comparable<PNode> {
     var pnodeName by property<String>()
     fun pnodeNameProperty() = getProperty(PNode::pnodeName)
 
-    var areaName by property<String>()
-    fun areaNameProperty() = getProperty(PNode::areaName)
-
     var pnodeType by property<String>()
     fun pnodeTypeProperty() = getProperty(PNode::pnodeType)
 
     var pnodeSubType by property<String>()
     fun pnodeSubTypeProperty() = getProperty(PNode::pnodeSubType)
 
+    var zone by property<String>()
+    fun zoneProperty() = getProperty(PNode::zone)
+
     var voltageLevel by property<String>()
     fun voltageLevelProperty() = getProperty(PNode::voltageLevel)
-
-    var retiredPNodeId by property<String>()
-    fun retiredPNodeIdProperty() = getProperty(PNode::retiredPNodeId)
 
     var effectiveDate by property<LocalDateTime>()
     fun effectiveDateProperty() = getProperty(PNode::effectiveDate)
@@ -55,23 +52,6 @@ class PNode : JsonModel, Comparable<PNode> {
     var terminationDate by property<LocalDateTime>()
     fun terminationDateProperty() = getProperty(PNode::terminationDate)
 
-    var zipCode by property<String>()
-    fun zipCodeProperty() = getProperty(PNode::zipCode)
-
-    var state by property<String>()
-    fun stateProperty() = getProperty(PNode::state)
-
-    var rtDailyLMP by property<Boolean>()
-    fun rtDailyLMPProperty() = getProperty(PNode::rtDailyLMP)
-
-    var daMonthlyLMP by property<Boolean>()
-    fun daMonthlyLMPProperty() = getProperty(PNode::daMonthlyLMP)
-
-    var daDailyLMP by property<Boolean>()
-    fun daDailyLMPProperty() = getProperty(PNode::daDailyLMP)
-
-    var rtMonthlyLMP by property<Boolean>()
-    fun rtMonthlyLMPProperty() = getProperty(PNode::rtMonthlyLMP)
 
     override fun compareTo(other: PNode): Int {
         return pnodeName.compareTo(other.pnodeName)
@@ -79,21 +59,14 @@ class PNode : JsonModel, Comparable<PNode> {
 
     override fun updateModel(json: JsonObject) {
         with(json) {
-            pnodeId = long("pnodeId")
-            pnodeName = string("pnodeName")
-            areaName = string("areaName")
-            pnodeType = string("pnodeType")
-            pnodeSubType = string("pnodeSubType")
-            voltageLevel = string("voltageLevel")
-            retiredPNodeId = string("retiredPNodeId")
-            effectiveDate = LocalDateTime.parse(getString("effectiveDate"), df)
-            terminationDate = LocalDateTime.parse(getString("terminationDate"), df)
-            zipCode = string("zipCode")
-            state = string("state")
-            rtDailyLMP = bool("rtDailyLMP")
-            rtMonthlyLMP = bool("rtMonthlyLMP")
-            daDailyLMP = bool("daDailyLMP")
-            daMonthlyLMP = bool("daMonthlyLMP")
+            pnodeId = long("pnode_id")
+            pnodeName = string("pnode_name")
+            pnodeType = string("pnode_type")
+            pnodeSubType = string("pnode_subtype")
+            zone = string("zone")
+            voltageLevel = string("voltage_level")
+            effectiveDate = LocalDateTime.parse(getString("effective_date"), df)
+            terminationDate = LocalDateTime.parse(getString("termination_date"), df)
         }
     }
 
