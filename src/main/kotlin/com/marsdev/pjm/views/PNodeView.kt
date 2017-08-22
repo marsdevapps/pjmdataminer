@@ -5,7 +5,7 @@ import com.marsdev.pjm.models.PNode
 import tornadofx.*
 
 
-class PnodeView : View("Pnodes") {
+class PNodeView : View("Pnodes") {
     val controller: PJMDataMinerController by inject()
 
     override val root = borderpane {

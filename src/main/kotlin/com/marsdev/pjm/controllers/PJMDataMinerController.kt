@@ -1,23 +1,29 @@
 package com.marsdev.pjm.controllers
 
 import com.marsdev.pjm.models.PNode
+import com.marsdev.pjm.models.Settings
 import com.marsdev.pjm.models.Topic
 import com.marsdev.pjm.views.ContentView
-import com.marsdev.pjm.views.PnodeView
+import com.marsdev.pjm.views.PNodeView
+import com.marsdev.pjm.views.SettingsView
 import tornadofx.*
 import javax.json.JsonArray
 import javax.json.JsonObject
 
 class PJMDataMinerController : Controller() {
     val api: Rest by inject()
+    val settings = Settings()
     val contentView: ContentView by inject()
-    val pnodeView: PnodeView by inject()
+    val pnodeView: PNodeView by inject()
+    val settingsView: SettingsView by inject()
 
     init {
         api.baseURI = "https://api.pjm.com/api/v1/"
         api.engine.requestInterceptor = { request ->
-            request.addHeader("Ocp-Apim-Subscription-Key", "")
+            request.addHeader("Ocp-Apim-Subscription-Key", settings.apiKeyProperty().get())
         }
+
+        settings.apiKeyProperty().set(config.string("apikey"))
     }
 
     fun getTopics(): MutableList<Topic> = api.get("topics").list().toModel<Topic>()
@@ -29,7 +35,18 @@ class PJMDataMinerController : Controller() {
         return items?.toModel<PNode>()!!
     }
 
-    fun showPnodeView() {
+    fun showPNodeView() {
         contentView.getContentPane().children.setAll(pnodeView.root)
+    }
+
+    fun showSettingsView() {
+        contentView.getContentPane().children.setAll(settingsView.root)
+    }
+
+    fun saveSettings() {
+        with(config) {
+            set("apikey" to settings.apiKeyProperty().get())
+            save()
+        }
     }
 }
