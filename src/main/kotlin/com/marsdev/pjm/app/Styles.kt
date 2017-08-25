@@ -21,6 +21,13 @@ class Styles : Stylesheet() {
         val B_700 = c("#1976D2")
         val B_800 = c("#1565C0")
         val B_900 = c("#0D47A1")
+
+        val hamburgerMenuBGColor = c("#64B5F6")
+        val hamburgerMenuAccentColor = c("#64B5F6")
+
+        val hamburger by cssclass()
+        val hamburgerMenu by cssclass()
+        val hamburgerMenuGraphic by cssclass()
     }
 
     init {
@@ -50,6 +57,29 @@ class Styles : Stylesheet() {
             }
             and(hover) {
                 backgroundColor += B_300
+            }
+        }
+
+        hamburger {
+            backgroundColor += hamburgerMenuBGColor
+            fill = Color.WHITE
+            stroke = Color.WHITE
+
+        }
+
+        hamburgerMenu {
+            fill = Color.WHITE
+            backgroundColor += Color.TRANSPARENT
+            stroke = Color.WHITE
+
+        }
+
+        hamburgerMenuGraphic {
+            backgroundColor += Color.TRANSPARENT
+            fill = Color.WHITE
+            line {
+                fill = Color.WHITE
+                stroke = Color.WHITE
             }
         }
     }

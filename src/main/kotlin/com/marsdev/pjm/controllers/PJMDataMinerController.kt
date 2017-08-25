@@ -5,11 +5,28 @@ import com.marsdev.pjm.models.Settings
 import com.marsdev.pjm.views.ContentView
 import com.marsdev.pjm.views.PNodeView
 import com.marsdev.pjm.views.SettingsView
+import javafx.animation.Animation
+import javafx.animation.KeyFrame
+import javafx.animation.KeyValue
+import javafx.animation.Timeline
+import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.SimpleDoubleProperty
+import javafx.scene.layout.AnchorPane
+import javafx.util.Duration
 import tornadofx.*
 import javax.json.JsonArray
 import javax.json.JsonObject
 
 class PJMDataMinerController : Controller() {
+    private var showTimeline: Timeline? = null
+    private var hideTimeline: Timeline? = null
+    private val collapsedWidth = 48.0
+    private val expandedWidth = 200.0
+    private val animationDuration = 50
+    val commandBarExpanded = SimpleBooleanProperty(false)
+    val commandBarWidth = SimpleDoubleProperty(48.0)
+
+
     val api: Rest by inject()
     val settings = Settings()
     val contentView: ContentView by inject()
@@ -45,5 +62,48 @@ class PJMDataMinerController : Controller() {
             set("apikey" to settings.apiKey)
             save()
         }
+    }
+
+    fun handleExpandCommandBar() {
+        if (commandBarExpanded.get()) {
+            println("Expanded")
+            hideCommandBar()
+        } else {
+            println("Not Expanded")
+            showCommandBar()
+        }
+    }
+
+    private fun hideCommandBar() {
+        if (showTimeline != null) {
+            showTimeline?.stop()
+        }
+
+        if (hideTimeline != null && hideTimeline?.status == Animation.Status.RUNNING) {
+            return
+        }
+        if (commandBarWidth.get() <= collapsedWidth) {
+            return
+        }
+        val duration = Duration.millis(animationDuration.toDouble())
+        hideTimeline = Timeline(KeyFrame(duration, KeyValue(commandBarWidth, collapsedWidth)))
+        AnchorPane.setLeftAnchor(contentView.root, collapsedWidth)
+        hideTimeline?.play()
+        commandBarExpanded.set(false)
+    }
+
+    private fun showCommandBar() {
+        if (hideTimeline != null) {
+            hideTimeline?.stop()
+        }
+        if (showTimeline != null && showTimeline?.status == Animation.Status.RUNNING) {
+            return
+        }
+        val duration = Duration.millis(animationDuration.toDouble())
+        val keyFrame = KeyFrame(duration, KeyValue(commandBarWidth, expandedWidth))
+        showTimeline = Timeline(keyFrame)
+        showTimeline?.setOnFinished { event -> AnchorPane.setLeftAnchor(contentView.root, expandedWidth) }
+        showTimeline?.play()
+        commandBarExpanded.set(true)
     }
 }
