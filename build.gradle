@@ -6,7 +6,7 @@ group = 'com.marsdev.pjm'
 version = '1.0'
 
 buildscript {
-    ext.kotlin_version = '1.1.4'
+    ext.kotlin_version = '1.1.51'
 
     repositories {
         jcenter()
@@ -36,15 +36,14 @@ dependencies {
     compile 'junit:junit:4.12'
     testCompile 'junit:junit:4.12'
 
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.4'
-    compile 'org.jetbrains.kotlin:kotlin-test-junit:1.0.4'
-    testCompile 'org.jetbrains.kotlin:kotlin-test-junit:1.0.4'
+    compile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
-    compile 'io.github.microutils:kotlin-logging:1.4'
+    compile 'io.github.microutils:kotlin-logging:1.4.6'
 
-    compile 'no.tornado:tornadofx:1.7.9'
+    compile 'no.tornado:tornadofx:1.7.13-SNAPSHOT'
 
-    compile 'org.jsoup:jsoup:1.10.3'
+    compile 'org.jsoup:jsoup:1.11.1'
 
     compile 'no.tornado:tornadofx-controls:1.0.7-SNAPSHOT'
     compile 'de.jensd:fontawesomefx-commons:8.15'
